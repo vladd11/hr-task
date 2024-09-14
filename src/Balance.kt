@@ -29,7 +29,11 @@ class Balance {
     }
 
     private fun iWithdraw(currency: String, amount: BigDecimal) {
-        balance[currency] = balance[currency]!! - amount;
+        if (currency == "BTC") {
+            balance[currency] = (balance[currency]!! - amount).setScale(8, RoundingMode.DOWN)
+        } else {
+            balance[currency] = (balance[currency]!! - amount).setScale(2, RoundingMode.DOWN)
+        }
     }
 
     fun withdraw(currency: String, amount: BigDecimal) {
@@ -43,7 +47,11 @@ class Balance {
     }
 
     private fun iDeposit(currency: String, amount: BigDecimal) {
-        balance[currency] = balance[currency]!! + amount
+        if (currency == "BTC") {
+            balance[currency] = (balance[currency]!! + amount).setScale(8, RoundingMode.DOWN)
+        } else {
+            balance[currency] = (balance[currency]!! + amount).setScale(2, RoundingMode.DOWN)
+        }
     }
 
     fun deposit(currency: String, amount: BigDecimal) {

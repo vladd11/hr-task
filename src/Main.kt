@@ -81,6 +81,9 @@ fun main() {
                 } catch (_: TooPreciseValue) {
                     println("Номинал меньше возможного")
                     continue
+                } catch (_ : NoSuchExchange) {
+                    println("Такого обмена не существует")
+                    continue
                 }
                 println("Операция выполнена успешно")
             }

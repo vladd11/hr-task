@@ -33,7 +33,11 @@ class Exchanger {
         for ((key) in currencies) {
             val rnd = BigDecimal(sr.nextInt(95, 105)).divide(BigDecimal(100))
             // There is no multithreading, so that's OK
-            currencies[key] = currencies[key]!!.multiply(rnd)
+            if (key.second == "BTC") {
+                currencies[key] = currencies[key]!!.multiply(rnd).setScale(8, RoundingMode.DOWN)
+            } else {
+                currencies[key] = currencies[key]!!.multiply(rnd).setScale(2, RoundingMode.DOWN)
+            }
         }
     }
 
@@ -42,7 +46,7 @@ class Exchanger {
 
         val rate = currencies[Pair(what, to)]
         if(rate != null) {
-            balance.deposit(to, many / rate)
+            balance.deposit(to, (many / rate))
         } else {
             balance.deposit(to, many * currencies[Pair(to, what)]!!)
         }
