@@ -57,7 +57,7 @@ class Exchanger {
             throw CurrencyNotExistsException()
         }
         if(!(currencies.containsKey(Pair(what, to)) || currencies.containsKey(Pair(to, what)))) {
-            throw NoSuchExchange(what, to);
+            throw NoSuchExchange(what, to)
         }
         if (manyUnpres <= BigDecimal.ZERO) {
             throw InvalidCurrencyCount()
